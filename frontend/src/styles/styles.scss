@@ -1,0 +1,13 @@
+@import "node_modules/bootstrap/scss/bootstrap";
+@import url(https://fonts.googleapis.com/css2?family=Roboto&display=swap);
+
+$default-fonts: "Roboto", sans-serif, Arial;
+
+body {
+    font-family: $default-fonts;
+}
+
+.game-canvas {
+    width: 50%;
+    height: 100%;
+}
