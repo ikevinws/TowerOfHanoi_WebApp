@@ -28,6 +28,6 @@ const AppNavbar = () => {
             </Navbar.Collapse>
         </Navbar>
     );
-}
+};
 
 export default AppNavbar;

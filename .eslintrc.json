@@ -1,0 +1,35 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2020": true,
+        "node": true
+    },
+    "extends": ["plugin:react/recommended", "airbnb"],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 11
+    },
+    "plugins": ["react"],
+    "rules": {
+        "indent": ["error", 4],
+        "array-element-newline": [
+            "error",
+            {
+                "multiline": true,
+                "minItems": 5
+            }
+        ],
+        "no-plusplus": [
+            "error",
+            {
+                "allowForLoopAfterthoughts": true
+            }
+        ],
+        "react/jsx-indent": ["error", 4],
+        "react/jsx-filename-extension": "off",
+        "react/jsx-indent-props": ["error", 4]
+    }
+}
