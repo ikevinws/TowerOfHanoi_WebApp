@@ -1,0 +1,19 @@
+{
+  "name": "towerofhanoi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "install-all": "concurrently \"npm install\" \"npm install --prefix frontend\"",
+    "start": "node server.js",
+    "client": "npm run start --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "path": "^0.12.7"
+  }
+}
