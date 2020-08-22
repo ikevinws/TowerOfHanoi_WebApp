@@ -9,7 +9,9 @@ const AppNavbar = () => {
         <Navbar expand="false" sticky="top" bg="dark" variant="dark">
             <Nav.Item>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Brand className="ml-2">Tower Of Hanoi</Navbar.Brand>
+                <Navbar.Brand className="ml-2" href="/">
+                    Tower Of Hanoi
+                </Navbar.Brand>
             </Nav.Item>
             <Form.Check
                 className="text-white-50 py-2 p-sm-2"
@@ -21,8 +23,9 @@ const AppNavbar = () => {
             />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="m-2">
-                    <Nav.Link href="/SignIn">Sign In</Nav.Link>
-                    <Nav.Link href="/CreateAccount">Create Account</Nav.Link>
+                    <Nav.Link href="/">Home</Nav.Link>
+                    <Nav.Link href="/Login">Sign In</Nav.Link>
+                    <Nav.Link href="/Signup">Create Account</Nav.Link>
                     <Nav.Link href="/Logout">Log Out</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
