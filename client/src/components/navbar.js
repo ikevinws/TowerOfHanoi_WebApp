@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Navbar, Nav, Form } from 'react-bootstrap';
+import { useBackground, useBackgroundUpdate } from '../utils/BackgroundContext';
 
 const AppNavbar = () => {
-    const [darkMode, setDarkMode] = useState(true);
-    const handleDarkModeSwitch = () => setDarkMode(!darkMode);
-
+    const darkMode = useBackground();
+    const toggleDarkMode = useBackgroundUpdate();
     return (
         <Navbar expand="false" sticky="top" bg="dark" variant="dark">
             <Nav.Item>
@@ -19,7 +19,7 @@ const AppNavbar = () => {
                 id="dark-mode-switch"
                 label="Dark-Mode"
                 checked={darkMode}
-                onChange={handleDarkModeSwitch}
+                onChange={toggleDarkMode}
             />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="m-2">

@@ -1,10 +1,14 @@
 import React from 'react';
-import Game from '../components/game';
+import Game from '../components/Game';
+import { useBackground } from '../utils/BackgroundContext';
 
-const Home = () => (
-    <div className="dark-background">
-        <Game />
-    </div>
-);
+const Home = () => {
+    const darkMode = useBackground();
+    return (
+        <div className={darkMode ? 'dark-background' : 'light-background'}>
+            <Game />
+        </div>
+    );
+};
 
 export default Home;
