@@ -1,4 +1,4 @@
-const Level = require('../model/level');
+const Level = require('../model/Level');
 
 // get all levels
 exports.getLevels = async (req, res) => {

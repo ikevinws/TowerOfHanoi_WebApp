@@ -1,5 +1,5 @@
 const express = require('express');
-const { getLevels } = require('../controller/level');
+const { getLevels } = require('../controller/Level');
 
 const router = express.Router();
 router.get('/', getLevels);
