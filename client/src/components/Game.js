@@ -13,7 +13,7 @@ const Game = () => {
                 streamingAssetsUrl: 'StreamingAssets',
                 companyName: 'KevinProductions',
                 productName: 'Tower Of Hanoi',
-                productVersion: '0.1',
+                productVersion: '0.1'
             })
             .then((unityInstance) => {
                 if (unityInstance) {
@@ -30,18 +30,19 @@ const Game = () => {
     cant use tenary to hide/show canvas because createUnityInstance needs
      canvas element with id=unity-canvas to exist when component is mounted
     */
-    const displayGame = unityInstanceLoaded ? '' : 'd-none';
+    const displayGame = unityInstanceLoaded ? 'game-canvas' : 'd-none';
     const displayLoading = unityInstanceLoaded ? 'd-none' : 'game-canvas loading-game-canvas';
     return (
         <>
-            <Container className="text-center p-0">
-                <canvas id="unity-canvas" className={`${displayGame} game-canvas`} />
+            <Container className="p-0">
+                <canvas id="unity-canvas" className={`${displayGame}`} />
                 <div className={displayLoading}>
                     <Spinner animation="border" role="status" variant="light">
                         <span className="sr-only">Loading...</span>
                     </Spinner>
                     <span className="ml-2">Loading Game...</span>
                 </div>
+                <h4 className="p-0 mt-2">Description</h4>
             </Container>
         </>
     );

@@ -13,6 +13,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 
 const levelRouter = require('./routes/Level');
+const userRouter = require('./routes/User');
 
 mongoose.connect(DATABASE_URL, {
     useNewUrlParser: true,
@@ -30,6 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/level', levelRouter);
+app.use('/api/user', userRouter);
 
 // Serve any static files
 app.use(express.static(path.join(__dirname, '../client/build')));

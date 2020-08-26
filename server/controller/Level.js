@@ -34,10 +34,10 @@ exports.getLevelById = async (req, res) => {
 // create level
 exports.addLevel = async (req, res) => {
     try {
-        const { level, userNameId, moves, time } = req.body;
+        const { level, usernameId, moves, time } = req.body;
 
         // find level in database based on number of moves made by player
-        const filter = { level, userName: userNameId, bestMoves: moves };
+        const filter = { level, userName: usernameId, bestMoves: moves };
         const prevLevelData = await Level.findOne(filter);
         if (prevLevelData != null) {
             // if level based on number of moves exists, compare and update best times
@@ -53,7 +53,7 @@ exports.addLevel = async (req, res) => {
                 level,
                 bestMoves: moves,
                 bestTime: time,
-                userName: userNameId
+                userName: usernameId
             });
             await levelData.save();
         }
