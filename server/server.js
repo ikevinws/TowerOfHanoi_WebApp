@@ -17,7 +17,7 @@ const levelRouter = require('./routes/Level');
 mongoose.connect(DATABASE_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
+    useCreateIndex: true
 });
 const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
