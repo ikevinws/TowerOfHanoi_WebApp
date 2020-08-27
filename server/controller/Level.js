@@ -5,8 +5,13 @@ const Level = require('../model/Level');
 exports.getLevels = async (req, res) => {
     try {
         const levels = await Level.find();
+        // extract decimals
+        const convertedLevels = levels.map((level) => {
+            const convertedLevel = { ...level.toObject(), bestTime: parseFloat(level.bestTime) };
+            return convertedLevel;
+        });
         res.status(200).json({
-            levels
+            levels: convertedLevels
         });
     } catch {
         res.status(500).send();
