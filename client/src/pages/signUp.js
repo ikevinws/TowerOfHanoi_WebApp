@@ -1,6 +1,6 @@
 import React from 'react';
-import SingUpForm from '../components/SignupForm';
-import { useBackground } from '../utils/BackgroundContext';
+import SingUpForm from '../components/signUpForm';
+import { useBackground } from '../utils/backgroundContext';
 
 const SignUp = () => {
     const darkMode = useBackground();

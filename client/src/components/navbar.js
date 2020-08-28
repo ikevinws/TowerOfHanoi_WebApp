@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar, Nav, Form } from 'react-bootstrap';
-import { useBackground, useBackgroundUpdate } from '../utils/BackgroundContext';
+import { useBackground, useBackgroundUpdate } from '../utils/backgroundContext';
 
 const AppNavbar = () => {
     const darkMode = useBackground();
@@ -24,8 +24,8 @@ const AppNavbar = () => {
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="m-2">
                     <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/Login">Sign In</Nav.Link>
-                    <Nav.Link href="/Signup">Create Account</Nav.Link>
+                    <Nav.Link href="/SignIn">Sign In</Nav.Link>
+                    <Nav.Link href="/SignUp">Create Account</Nav.Link>
                     <Nav.Link href="/Logout">Log Out</Nav.Link>
                 </Nav>
             </Navbar.Collapse>

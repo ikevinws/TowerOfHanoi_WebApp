@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Level = require('../model/Level');
+const Level = require('../model/level');
 
 // get all levels
 exports.getLevels = async (req, res) => {
@@ -29,7 +29,7 @@ exports.getLevelById = async (req, res) => {
             };
             res.status(200).json(levelData);
         } else {
-            res.status(400).send('Cannot find level');
+            res.status(400).json({ msg: 'Cannot find level.' });
         }
     } catch {
         res.status(500).send();
@@ -58,7 +58,7 @@ exports.addLevel = async (req, res) => {
                 level,
                 bestMoves: moves,
                 bestTime: time,
-                userName: usernameId
+                username: usernameId
             });
             await levelData.save();
         }

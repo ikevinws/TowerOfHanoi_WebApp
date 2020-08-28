@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Image, Button } from 'react-bootstrap';
 
-const SingUpForm = () => {
+const SignUpForm = () => {
     return (
         <Form className="signup-form">
             <Image
@@ -17,9 +17,17 @@ const SingUpForm = () => {
                 <Form.Label srOnly>Username</Form.Label>
                 <Form.Control type="text" placeholder="Username" className="rounded-top" />
             </Form.Group>
-            <Form.Group controlId="Password">
+            <Form.Group controlId="Password" className="mb-0">
                 <Form.Label srOnly>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" className="rounded-bottom" />
+                <Form.Control type="password" placeholder="Password" className="rounded-0" />
+            </Form.Group>
+            <Form.Group controlId="ConfirmedPassword">
+                <Form.Label srOnly>Confirm Password</Form.Label>
+                <Form.Control
+                    type="password"
+                    placeholder="Confirm Password"
+                    className="rounded-bottom"
+                />
             </Form.Group>
             <Button varitant="primary" type="submit" block size="lg">
                 Create Account
@@ -28,4 +36,4 @@ const SingUpForm = () => {
     );
 };
 
-export default SingUpForm;
+export default SignUpForm;

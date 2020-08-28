@@ -1,13 +1,13 @@
 import React from 'react';
-import LoginForm from '../components/LoginForm';
-import { useBackground } from '../utils/BackgroundContext';
+import SignInForm from '../components/signInForm';
+import { useBackground } from '../utils/backgroundContext';
 
 const Login = () => {
     const darkMode = useBackground();
     const theme = darkMode ? 'dark-background' : 'light-background';
     return (
         <div className={`${theme} d-flex align-items-center justify-content-center`}>
-            <LoginForm />
+            <SignInForm />
         </div>
     );
 };

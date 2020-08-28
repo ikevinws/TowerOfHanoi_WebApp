@@ -27,5 +27,13 @@
             }
         ],
         "no-underscore-dangle": "off"
-    }
+    },
+    "overrides": [
+        {
+            "files": ["server/**"],
+            "rules": {
+                "no-console": "off"
+            }
+        }
+    ]
 }

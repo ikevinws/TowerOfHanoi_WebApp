@@ -1,6 +1,6 @@
 import React from 'react';
-import Game from '../components/Game';
-import { useBackground } from '../utils/BackgroundContext';
+import Game from '../components/game';
+import { useBackground } from '../utils/backgroundContext';
 
 const Home = () => {
     const darkMode = useBackground();

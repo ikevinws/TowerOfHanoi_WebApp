@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Image, Button } from 'react-bootstrap';
 
-const LoginForm = () => {
+const SignInForm = () => {
     return (
         <Form className="login-form">
             <Image
@@ -35,4 +35,4 @@ const LoginForm = () => {
     );
 };
 
-export default LoginForm;
+export default SignInForm;

@@ -2,11 +2,11 @@ import React from 'react';
 import { Route, Redirect, Switch, BrowserRouter as Router } from 'react-router-dom';
 
 import './styles/styles.scss';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import SignUp from './pages/Singup';
-import { BackgroundThemeProvider } from './utils/BackgroundContext';
+import Navbar from './components/navbar';
+import Home from './pages/home';
+import SignIn from './pages/signIn';
+import SignUp from './pages/signUp';
+import { BackgroundThemeProvider } from './utils/backgroundContext';
 
 const App = () => {
     return (
@@ -15,7 +15,7 @@ const App = () => {
                 <Navbar />
                 <Switch>
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/Login" component={Login} />
+                    <Route exact path="/Signin" component={SignIn} />
                     <Route exact path="/Signup" component={SignUp} />
                     <Redirect to="/" />
                 </Switch>
