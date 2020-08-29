@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const User = require('../model/user');
 
@@ -10,7 +9,7 @@ const User = require('../model/user');
  * @param {array} errorArr
  * @return {void}
  */
-function ValidateSignUpFields(username, password, confirmedPassword, errorArr) {
+const ValidateSignUpFields = (username, password, confirmedPassword, errorArr) => {
     if (!username || !password) {
         errorArr.push({ msg: 'Not all fields have been entered.' });
     }
@@ -20,7 +19,7 @@ function ValidateSignUpFields(username, password, confirmedPassword, errorArr) {
     if (password.length < 6) {
         errorArr.push({ msg: 'The password needs to be at least 6 characters long.' });
     }
-}
+};
 
 exports.addUser = async (req, res) => {
     const { username, password, confirmedPassword } = req.body;
@@ -39,7 +38,6 @@ exports.addUser = async (req, res) => {
                 // create new user with hashed password
                 const hashedPassword = await bcrypt.hash(password, 10);
                 const newUser = new User({
-                    _id: mongoose.Types.ObjectId(),
                     username,
                     password: hashedPassword
                 });
@@ -53,19 +51,24 @@ exports.addUser = async (req, res) => {
     }
 };
 
-exports.signInUser = async (req, res) => {
-    const { username, password } = req.body;
-    const errors = [];
-    try {
-        const existingUser = await User.findOneByUserName(username);
-        if (existingUser && (await bcrypt.compare(password, existingUser.password))) {
-            res.send('Suceess');
-        } else {
-            errors.push({ msg: 'The username or password is incorrect.' });
-            res.status(400).json({ errors });
-        }
-    } catch (err) {
-        console.log(err);
-        res.status(500).send();
-    }
+// exports.signInUser = async (req, res) => {
+//     const { username, password } = req.body;
+//     const errors = [];
+//     try {
+//         const existingUser = await User.findOneByUserName(username);
+//         if (existingUser && (await bcrypt.compare(password, existingUser.password))) {
+//             res.send('Suceess');
+//         } else {
+//             errors.push({ msg: 'The username or password is incorrect.' });
+//             res.status(400).json({ errors });
+//         }
+//     } catch (err) {
+//         console.log(err);
+//         res.status(500).send();
+//     }
+// };
+
+exports.signOutUser = async (req, res) => {
+    req.logout();
+    res.redirect('/signin');
 };

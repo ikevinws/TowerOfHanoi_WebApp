@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const Level = require('../model/level');
 
 // get all levels
@@ -42,7 +41,7 @@ exports.addLevel = async (req, res) => {
         const { level, usernameId, moves, time } = req.body;
 
         // find level in database based on number of moves made by player
-        const filter = { level, userName: usernameId, bestMoves: moves };
+        const filter = { level, username: usernameId, bestMoves: moves };
         const prevLevelData = await Level.findOne(filter);
         if (prevLevelData != null) {
             // if level based on number of moves exists, compare and update best times
@@ -54,7 +53,6 @@ exports.addLevel = async (req, res) => {
         } else {
             // if level based on number of moves doesnt exists, add new level data
             const levelData = new Level({
-                _id: mongoose.Types.ObjectId(),
                 level,
                 bestMoves: moves,
                 bestTime: time,

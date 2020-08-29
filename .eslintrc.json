@@ -34,6 +34,12 @@
             "rules": {
                 "no-console": "off"
             }
+        },
+        {
+            "files": ["server/middleware/*.js"],
+            "rules": {
+                "consistent-return": "off"
+            }
         }
     ]
 }
