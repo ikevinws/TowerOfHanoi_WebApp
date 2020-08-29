@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const passport = require('passport');
 const User = require('../model/user');
 
 /**
@@ -51,24 +52,30 @@ exports.addUser = async (req, res) => {
     }
 };
 
-// exports.signInUser = async (req, res) => {
-//     const { username, password } = req.body;
-//     const errors = [];
-//     try {
-//         const existingUser = await User.findOneByUserName(username);
-//         if (existingUser && (await bcrypt.compare(password, existingUser.password))) {
-//             res.send('Suceess');
-//         } else {
-//             errors.push({ msg: 'The username or password is incorrect.' });
-//             res.status(400).json({ errors });
-//         }
-//     } catch (err) {
-//         console.log(err);
-//         res.status(500).send();
-//     }
-// };
+exports.signInUser = (req, res, next) => {
+    passport.authenticate('local', (err, user) => {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            return res.status(400).send();
+        }
+        req.login(user, (error) => {
+            if (error) {
+                return next(error);
+            }
+            return res.status(200).send();
+        });
+        return res.status(200).send();
+    })(req, res, next);
+};
 
-exports.signOutUser = async (req, res) => {
+exports.signOutUser = async (req, res, next) => {
     req.logout();
-    res.redirect('/signin');
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).send();
+        }
+        return res.clearCookie('connect.sid').status(200).send();
+    });
 };

@@ -13,24 +13,32 @@ const PassportConfig = (passport) => {
     const verifyCB = async (username, password, done) => {
         try {
             const user = await User.findOneByUserName(username);
+            // if user does not exist
             if (!user) {
-                return done(null, false, { message: 'Incorrect username.' });
+                return done(null, false);
             }
-            if (!validPassword(password, user)) {
-                return done(null, false, { message: 'Incorrect password.' });
+            const passwordIsValid = await validPassword(password, user);
+            // if password is not valid
+            if (!passwordIsValid) {
+                return done(null, false);
             }
+
             return done(null, user);
         } catch (err) {
             return done(err);
         }
     };
-
-    const localStrategy = new LocalStrategy(verifyCB);
+    // options is not necessary, Default options
+    const options = {
+        usernameField: 'username',
+        passwordField: 'password'
+    };
+    const localStrategy = new LocalStrategy(options, verifyCB);
 
     passport.use(localStrategy);
 
     passport.serializeUser((user, done) => {
-        done(null, user.id);
+        done(null, user._id);
     });
     passport.deserializeUser(async (userId, done) => {
         try {

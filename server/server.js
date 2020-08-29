@@ -5,6 +5,10 @@ if (!IN_PROD) {
     dotenv.config();
 }
 
+// env
+const { DATABASE_URL, SESSION_SECRET } = process.env;
+const PORT = process.env.PORT || 5000;
+
 // imports
 const express = require('express');
 const cors = require('cors');
@@ -14,34 +18,24 @@ const path = require('path');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('passport');
-const PassportConfig = require('./config/passport');
-// configure passport
-PassportConfig(passport);
-
-// env
-const { DATABASE_URL, SESSION_SECRET } = process.env;
-const PORT = process.env.PORT || 5000;
-
+const passportConfig = require('./config/passport');
+const dbConfig = require('./config/database');
 // routers
 const levelRouter = require('./routes/level');
 const userRouter = require('./routes/user');
 
-// database
-mongoose.connect(DATABASE_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true
-});
-const db = mongoose.connection;
-db.on('error', (error) => console.error(error));
-db.once('open', () => console.log('Connected to Mongoose'));
+// configure passport and database
+passportConfig(passport);
+dbConfig(mongoose, DATABASE_URL);
 
+// session
 const sessionStore = new MongoStore({
-    mongooseConnection: db,
+    mongooseConnection: mongoose.connection,
     collection: 'sessions'
 });
-const app = express();
+
 // middleware
+const app = express();
 app.use(cors({ credentials: true }));
 app.use(morgan('dev'));
 app.use(express.json());
@@ -52,8 +46,9 @@ app.use(
         resave: false,
         saveUninitialized: false,
         store: sessionStore,
+        rolling: true,
         cookie: {
-            maxAge: 24 * 60 * 60 * 1000, // max age = 1 day (1day * 24hr/1day * 60 min/1hr * 60sec/1min * 1000ms/1sec)
+            maxAge: 24 * 60 * 60 * 1000, // maxAge = 1 day (1day * 24hr/1day * 60 min/1hr * 60sec/1min * 1000ms/1sec)
             secure: IN_PROD
         }
     })
@@ -66,14 +61,15 @@ app.use((req, res, next) => {
     console.log(req.user);
     next();
 });
-
 app.use('/api/level', levelRouter);
 app.use('/api/user', userRouter);
 
-// Serve any static files
-app.use(express.static(path.join(__dirname, '../client/build')));
-// Handle React routing, return all requests to React app
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
+if (IN_PROD) {
+    // Serve any static files
+    app.use(express.static(path.join(__dirname, '../client/build')));
+    // Handle React routing, return all requests to React app
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+    });
+}
 app.listen(PORT);

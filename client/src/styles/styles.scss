@@ -1,7 +1,7 @@
-@import "node_modules/bootstrap/scss/bootstrap";
+@import 'node_modules/bootstrap/scss/bootstrap';
 @import url(https://fonts.googleapis.com/css2?family=Roboto&display=swap);
 
-$default-fonts: "Roboto", sans-serif, Arial;
+$default-fonts: 'Roboto', sans-serif, Arial;
 $light-text-color: rgb(209, 205, 199);
 $dark-text-color: rgb(10, 10, 35);
 
@@ -40,7 +40,7 @@ body {
     }
 }
 
-.login-form,
+.signin-form,
 .signup-form {
     width: 100%;
     max-width: 350px;
@@ -48,7 +48,7 @@ body {
     margin: 0 auto;
 }
 
-.login-form .form-control,
+.signin-form .form-control,
 .signup-form .form-control {
     border-radius: 0;
 }
