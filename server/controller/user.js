@@ -70,7 +70,7 @@ exports.signInUser = (req, res, next) => {
     })(req, res, next);
 };
 
-exports.signOutUser = async (req, res, next) => {
+exports.signOutUser = async (req, res) => {
     req.logout();
     req.session.destroy((err) => {
         if (err) {
