@@ -3,6 +3,9 @@ import React, { useState, useContext, useEffect } from 'react';
 const BackgroundContext = React.createContext();
 const BackgroundUpdateContext = React.createContext();
 
+const useBackgroundTheme = () => {
+    return useContext(BackgroundContext) ? 'dark-background' : 'light-background';
+};
 const useBackground = () => {
     return useContext(BackgroundContext);
 };
@@ -39,4 +42,4 @@ const BackgroundThemeProvider = ({ children }) => {
     );
 };
 
-export { BackgroundThemeProvider, useBackground, useBackgroundUpdate };
+export { BackgroundThemeProvider, useBackground, useBackgroundUpdate, useBackgroundTheme };

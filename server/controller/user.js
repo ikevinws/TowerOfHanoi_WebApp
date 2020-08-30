@@ -58,7 +58,7 @@ exports.signInUser = (req, res, next) => {
             return next(err);
         }
         if (!user) {
-            return res.status(400).send();
+            return res.status(400).send({ msg: 'Invalid username or password.' });
         }
         req.login(user, (error) => {
             if (error) {

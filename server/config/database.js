@@ -4,7 +4,7 @@ const logMsg = (msg) => {
 
 const dbConfig = async (mongoose, DATABASE_URL) => {
     try {
-        await mongoose.connect(DATABASE_URL, {
+        mongoose.connect(DATABASE_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true

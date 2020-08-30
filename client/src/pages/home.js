@@ -1,11 +1,11 @@
 import React from 'react';
 import Game from '../components/game';
-import { useBackground } from '../utils/backgroundContext';
+import { useBackgroundTheme } from '../utils/backgroundContext';
 
 const Home = () => {
-    const darkMode = useBackground();
+    const backgroundTheme = useBackgroundTheme();
     return (
-        <div className={darkMode ? 'dark-background' : 'light-background'}>
+        <div className={backgroundTheme}>
             <Game />
         </div>
     );

@@ -1,23 +1,42 @@
 import React, { useState } from 'react';
-import { Form, Image, Button, Alert } from 'react-bootstrap';
+import { Form, Image, Button } from 'react-bootstrap';
 import axios from 'axios';
+import FormAlert from './formAlert';
 const SignInForm = () => {
+    //error handling
+    const [showSignInError, setShowSignInError] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('Invalid username or password');
+
+    //form data handling
     const [signInData, setSignInData] = useState({
         username: '',
         password: ''
     });
-    const [showError, setShowError] = useState(false);
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const res = await axios.post('/api/user/signin', {
-                username: signInData.username,
-                password: signInData.password
-            });
+            const res = await axios.post(
+                '/api/user/signin',
+                {
+                    username: signInData.username,
+                    password: signInData.password
+                },
+                { withCredentials: true }
+            );
             if (res.status === 200) {
+                window.location.href = '/';
             }
         } catch (err) {
-            setShowError(true);
+            if (err.response) {
+                // client received an error response (5xx, 4xx)
+                if (err.response.data.msg) {
+                    setErrorMsg(err.response.data.msg);
+                }
+            } else {
+                // anything else
+                setErrorMsg('An error occurred on the server. Please try again');
+            }
+            setShowSignInError(true);
         }
     };
     const handleChange = (event) => {
@@ -27,11 +46,11 @@ const SignInForm = () => {
 
     return (
         <Form className="signin-form" onSubmit={handleSubmit}>
-            {showError ? (
-                <Alert variant="warning" dismissible onClose={() => setShowError(false)}>
-                    <p className="m-0">Incorrect username or password.</p>
-                </Alert>
-            ) : null}
+            <FormAlert
+                showAlert={showSignInError}
+                setShowAlert={setShowSignInError}
+                message={errorMsg}
+            />
             <Image
                 src="/images/TowerOfHanoi_Icon.svg"
                 alt="Tower of Hanoi Icon"

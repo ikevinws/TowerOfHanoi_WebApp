@@ -1,12 +1,15 @@
-@import 'node_modules/bootstrap/scss/bootstrap';
+@import "node_modules/bootstrap/scss/bootstrap";
 @import url(https://fonts.googleapis.com/css2?family=Roboto&display=swap);
 
-$default-fonts: 'Roboto', sans-serif, Arial;
+$default-fonts: "Roboto", sans-serif, Arial;
 $light-text-color: rgb(209, 205, 199);
 $dark-text-color: rgb(10, 10, 35);
 
-body {
+body,
+html {
     font-family: $default-fonts;
+    height: 100%;
+    margin: 0;
 }
 
 .game-canvas {
@@ -20,7 +23,7 @@ body {
 
 .light-background {
     background: #e8e8e8;
-    min-height: 100vh;
+    height: 100vh;
     color: $dark-text-color;
 }
 
@@ -32,7 +35,7 @@ body {
 
 .dark-background {
     background: #181818;
-    min-height: 100vh;
+    height: 100vh;
     color: $light-text-color;
 
     .text-muted {
