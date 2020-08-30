@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Form, Image, Button } from 'react-bootstrap';
 import axios from 'axios';
-import FormAlert from './formAlert';
+import { formAlert as FormAlert, errorList } from './formAlert';
 const SignInForm = () => {
     //error handling
     const [showSignInError, setShowSignInError] = useState(false);
-    const [errorMsg, setErrorMsg] = useState('Invalid username or password');
+    const [errorArr, setErrorArr] = useState(['Invalid username or password']);
 
     //form data handling
     const [signInData, setSignInData] = useState({
@@ -29,12 +29,12 @@ const SignInForm = () => {
         } catch (err) {
             if (err.response) {
                 // client received an error response (5xx, 4xx)
-                if (err.response.data.msg) {
-                    setErrorMsg(err.response.data.msg);
+                if (err.response.data.errors) {
+                    setErrorArr([...err.response.data.errors]);
                 }
             } else {
                 // anything else
-                setErrorMsg('An error occurred on the server. Please try again');
+                setErrorArr(['An error occurred on the server. Please try again']);
             }
             setShowSignInError(true);
         }
@@ -43,13 +43,12 @@ const SignInForm = () => {
         const { name, value } = event.target;
         setSignInData({ ...signInData, [name]: value });
     };
-
     return (
         <Form className="signin-form" onSubmit={handleSubmit}>
             <FormAlert
                 showAlert={showSignInError}
                 setShowAlert={setShowSignInError}
-                message={errorMsg}
+                message={errorList(errorArr)}
             />
             <Image
                 src="/images/TowerOfHanoi_Icon.svg"

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Image, Button } from 'react-bootstrap';
 import axios from 'axios';
-import FormAlert from './formAlert';
+import { formAlert as FormAlert, errorList } from './formAlert';
 
 const SignUpForm = () => {
     // form data handling
@@ -49,18 +49,13 @@ const SignUpForm = () => {
             setShowSignInError(true);
         }
     };
-    const errMsgsComponent = (errorArr) => {
-        const errMsgsComponent = errorArr.map((err) => <li>{err.msg}</li>);
-        console.log(errMsgsComponent);
-        return <ul className="m-0 pl-4">{errMsgsComponent}</ul>;
-    };
 
     return (
         <Form className="signup-form" onSubmit={handleSubmit}>
             <FormAlert
                 showAlert={showSignInError}
                 setShowAlert={setShowSignInError}
-                message={errMsgsComponent(errorArr)}
+                message={errorList(errorArr)}
                 heading={'Invalid Sign Up'}
             />
             <Image
