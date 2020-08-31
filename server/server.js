@@ -35,8 +35,8 @@ const sessionStore = new MongoStore({
     collection: 'sessions'
 });
 
-// middleware
 const app = express();
+// middleware
 app.use(cors({ credentials: true, origin: ORIGIN }));
 app.use(morgan('dev'));
 app.use(express.json());
@@ -47,6 +47,7 @@ app.use(
         resave: false,
         saveUninitialized: false,
         store: sessionStore,
+        proxy: true, // heroku required, reference: https://stackoverflow.com/questions/14463972/how-to-set-secure-cookie-using-heroku-node-js-express
         rolling: true,
         cookie: {
             maxAge: 24 * 60 * 60 * 1000, // maxAge = 1 day (1day * 24hr/1day * 60 min/1hr * 60sec/1min * 1000ms/1sec)
@@ -54,6 +55,7 @@ app.use(
         }
     })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 
