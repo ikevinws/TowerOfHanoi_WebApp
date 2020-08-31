@@ -1,8 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Spinner } from 'react-bootstrap';
 
+const InitializeUnityInstanceFunctions = (setHasWon, setLevelData) => {
+    //functions for unity instance to use
+    //possibly a better way then using window
+    if (!window.handleWin) {
+        window.handleWin = function (level, bestMoves, bestTime) {
+            window.setLevelData({
+                level: parseInt(level),
+                bestMoves: parseInt(bestMoves),
+                bestTime: parseFloat(bestTime)
+            });
+            window.setHasWon(true);
+        };
+    }
+    if (!window.setHasWon) {
+        window.setHasWon = setHasWon;
+    }
+    if (!window.setLevelData) {
+        window.setLevelData = setLevelData;
+    }
+};
+
 const Game = () => {
     const [unityInstanceLoaded, setUnityInstanceLoaded] = useState(false);
+    const [hasWon, setHasWon] = useState(false);
+    const [levelData, setLevelData] = useState({});
     useEffect(() => {
         const canvasElement = document.querySelector('#unity-canvas');
         window
@@ -18,18 +41,19 @@ const Game = () => {
             .then((unityInstance) => {
                 if (unityInstance) {
                     setUnityInstanceLoaded((prevLoaded) => !prevLoaded);
+                    InitializeUnityInstanceFunctions(setHasWon, setLevelData);
                 }
             })
             .catch(() => {
-                // alert(message);
+                alert('Could not load game. Page will be reloaded.');
                 window.location.reload();
             });
     }, []);
 
-    /*
-    cant use tenary to hide/show canvas because createUnityInstance needs
-     canvas element with id=unity-canvas to exist when component is mounted
-    */
+    /**
+     * cant use tenary to hide/show canvas because createUnityInstance needs
+     * canvas element with id=unity-canvas to exist when component is mounted
+     */
     const displayGame = unityInstanceLoaded ? 'game-canvas' : 'd-none';
     const displayLoading = unityInstanceLoaded ? 'd-none' : 'game-canvas loading-game-canvas';
     return (
