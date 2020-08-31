@@ -36,7 +36,7 @@ const sessionStore = new MongoStore({
 
 // middleware
 const app = express();
-app.use(cors({ credentials: true }));
+app.use(cors({ credentials: true, origin: 'https://tower-of-hanoi-kevin.herokuapp.com/' }));
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
