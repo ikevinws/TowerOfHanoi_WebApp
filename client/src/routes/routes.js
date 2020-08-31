@@ -51,7 +51,7 @@ const NotAuthRoute = ({ component: Component, ...rest }) => {
     return (
         <Route
             {...rest}
-            render={(props) => (auth.isAuth ? <Component {...props} /> : <Redirect to="/" />)}
+            render={(props) => (!auth.isAuth ? <Component {...props} /> : <Redirect to="/" />)}
         />
     );
 };
