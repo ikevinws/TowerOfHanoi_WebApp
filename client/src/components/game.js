@@ -38,7 +38,7 @@ const Game = () => {
                 <canvas id="unity-canvas" className={`${displayGame}`} />
                 <div className={displayLoading}>
                     <Spinner animation="border" role="status" variant="light">
-                        <span className="sr-only">Loading...</span>
+                        <span className="sr-only">Loading Game...</span>
                     </Spinner>
                     <span className="ml-2">Loading Game...</span>
                 </div>

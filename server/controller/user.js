@@ -54,11 +54,13 @@ exports.addUser = async (req, res) => {
 
 exports.signInUser = (req, res, next) => {
     passport.authenticate('local', (err, user) => {
+        const errors = [];
         if (err) {
             return next(err);
         }
         if (!user) {
-            return res.status(400).send({ msg: 'Invalid username or password.' });
+            errors.push({ msg: 'Invalid username or password.' });
+            return res.status(400).send({ errors });
         }
         req.login(user, (error) => {
             if (error) {
@@ -78,4 +80,11 @@ exports.signOutUser = async (req, res) => {
         }
         return res.clearCookie('connect.sid').status(200).send();
     });
+};
+
+exports.checkUserAuth = async (req, res) => {
+    if (req.isAuthenticated()) {
+        return res.status(200).send({ userId: req.user._id });
+    }
+    return res.status(401).send();
 };

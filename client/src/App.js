@@ -1,26 +1,19 @@
 import React from 'react';
-import { Route, Redirect, Switch, BrowserRouter as Router } from 'react-router-dom';
 
 import './styles/styles.scss';
+import Routes from './routes/routes';
 import Navbar from './components/navbar';
-import Home from './pages/home';
-import SignIn from './pages/signIn';
-import SignUp from './pages/signUp';
 import { BackgroundThemeProvider } from './utils/backgroundContext';
+import { AuthProvider } from './utils/authContext';
 
 const App = () => {
     return (
-        <Router>
-            <BackgroundThemeProvider>
+        <BackgroundThemeProvider>
+            <AuthProvider>
                 <Navbar />
-                <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/signin" component={SignIn} />
-                    <Route exact path="/signup" component={SignUp} />
-                    <Redirect to="/" />
-                </Switch>
-            </BackgroundThemeProvider>
-        </Router>
+                <Routes />
+            </AuthProvider>
+        </BackgroundThemeProvider>
     );
 };
 
