@@ -31,10 +31,14 @@ const SignInForm = () => {
                 // client received an error response (5xx, 4xx)
                 if (err.response.data.errors) {
                     setErrorArr([...err.response.data.errors]);
+                } else {
+                    setErrorArr([
+                        { msg: 'An error has occurred on the server. Please try again.' }
+                    ]);
                 }
             } else {
                 // anything else
-                setErrorArr(['An error occurred on the server. Please try again']);
+                setErrorArr([{ msg: 'An error has occurred on the server. Please try again.' }]);
             }
             setShowSignInError(true);
         }

@@ -43,7 +43,7 @@ const SignUpForm = () => {
                 // anything else
                 setErrorArr((prevMsgs) => [
                     ...prevMsgs,
-                    'An error occurred on the server. Please try again'
+                    { msg: 'An error occurred on the server. Please try again' }
                 ]);
             }
             setShowSignInError(true);
