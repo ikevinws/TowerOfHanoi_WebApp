@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Image, Button } from 'react-bootstrap';
 import axios from 'axios';
-import { formAlert as FormAlert, errorList } from './formAlert';
+import { alert as FormAlert, errorList } from './alert';
 
 const SignUpForm = () => {
     // form data handling

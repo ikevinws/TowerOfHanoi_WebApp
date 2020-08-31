@@ -5,7 +5,7 @@ import { useBackgroundTheme } from '../utils/backgroundContext';
 const SignUp = () => {
     const backgroundTheme = useBackgroundTheme();
     return (
-        <div className={`${backgroundTheme} d-flex align-items-center justify-content-center`}>
+        <div className={`${backgroundTheme} signup-container`}>
             <SingUpForm />
         </div>
     );

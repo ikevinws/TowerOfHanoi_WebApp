@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Route, Redirect, Switch, BrowserRouter as Router } from 'react-router-dom';
 import axios from 'axios';
 import Home from '../pages/home';
@@ -14,21 +14,27 @@ const PageRoutes = () => {
      */
     const authRef = useRef(useAuthContext());
     const userRef = useRef(useUserContext());
+
+    //resReceived is passed down to Home component to determine if sign in alert should be displayed
+    const [resReceived, setResReceived] = useState(false);
+
+    //check if user is auth
     useEffect(() => {
         const checkAuth = async () => {
-            const res = await axios.get('/api/user/checkAuth', { withCredentials: true });
-            if (res.data.userId) {
-                authRef.current.setIsAuth(true);
-                userRef.current.setUser((prevUserData) => {
-                    return { ...prevUserData, userId: res.data.userId };
-                });
+            try {
+                const res = await axios.get('/api/user/checkAuth', { withCredentials: true });
+                if (res.data.userId) {
+                    authRef.current.setIsAuth(true);
+                    userRef.current.setUser((prevUserData) => {
+                        return { ...prevUserData, userId: res.data.userId };
+                    });
+                }
+                setResReceived(true);
+            } catch (err) {
+                setResReceived(true);
             }
         };
-        try {
-            checkAuth();
-        } catch (err) {
-            authRef.current.setIsAuth(false);
-        }
+        checkAuth();
     }, []);
 
     //Route Summary: If user is signed in, block signin and sign up routes. Otherwise all routes are availble
@@ -36,7 +42,11 @@ const PageRoutes = () => {
         <Router>
             <Switch>
                 <Route exact path="/leaderboard" component={Leaderboard} />
-                <Route exact path="/" component={Home} />
+                <Route
+                    exact
+                    path="/"
+                    render={(props) => <Home {...props} resReceived={resReceived} />}
+                />
                 <NotAuthRoute exact path="/signin" component={SignIn} />
                 <NotAuthRoute exact path="/signup" component={SignUp} />
                 <Redirect to="/" />
