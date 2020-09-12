@@ -1,10 +1,8 @@
 import React from 'react';
-import SignInForm from '../components/signInForm';
-import { useBackgroundTheme } from '../utils/backgroundContext';
+import SignInForm from '../components/signInForm/signInForm';
 const Login = () => {
-    const backgroundTheme = useBackgroundTheme();
     return (
-        <div className={`${backgroundTheme} signin-container`}>
+        <div className="signin-container h-100">
             <SignInForm />
         </div>
     );

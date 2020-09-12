@@ -1,11 +1,9 @@
 import React from 'react';
-import SingUpForm from '../components/signUpForm';
-import { useBackgroundTheme } from '../utils/backgroundContext';
+import SingUpForm from '../components/signUpForm/signUpForm';
 
 const SignUp = () => {
-    const backgroundTheme = useBackgroundTheme();
     return (
-        <div className={`${backgroundTheme} signup-container`}>
+        <div className="signup-container h-100">
             <SingUpForm />
         </div>
     );

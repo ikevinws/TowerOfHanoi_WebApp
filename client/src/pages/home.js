@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Game from '../components/game';
-import { useBackgroundTheme } from '../utils/backgroundContext';
+import Game from '../components/game/game';
 import { useAuthContext } from '../utils/authContext';
-import { alert as Alert } from '../components/alert';
+import { alert as Alert } from '../components/alert/alert';
 import { Container } from 'react-bootstrap';
 const Home = ({ resReceived }) => {
-    const backgroundTheme = useBackgroundTheme();
     const auth = useAuthContext();
     const [showAlert, setShowAlert] = useState(false);
 
@@ -19,7 +17,7 @@ const Home = ({ resReceived }) => {
     }, [auth.isAuth, resReceived]);
 
     return (
-        <div className={`${backgroundTheme} home-container`}>
+        <div className="w-100 home-container">
             {showAlert ? (
                 <Container className="d-block my-3 p-0">
                     <Alert

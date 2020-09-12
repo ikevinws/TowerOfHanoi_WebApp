@@ -1,0 +1,17 @@
+.signin-form {
+    width: 100%;
+    max-width: 350px;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.signin-form .form-control {
+    border-radius: 0;
+}
+
+.signin-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

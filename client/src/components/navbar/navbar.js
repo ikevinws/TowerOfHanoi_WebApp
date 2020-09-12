@@ -2,6 +2,7 @@ import React from 'react';
 import { Navbar, Nav, Form } from 'react-bootstrap';
 import { useBackground, useBackgroundUpdate } from '../../utils/backgroundContext';
 import { useAuthContext } from '../../utils/authContext';
+import './navbar.scss';
 import axios from 'axios';
 
 const AppNavbar = () => {

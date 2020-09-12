@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Spinner } from 'react-bootstrap';
+import './game.scss';
 
 const InitializeUnityInstanceFunctions = (setHasWon, setLevelData) => {
     //functions for unity instance to use
@@ -50,6 +51,8 @@ const Game = () => {
             });
     }, []);
 
+    if (hasWon) {
+    }
     /**
      * cant use tenary to hide/show canvas because createUnityInstance needs
      * canvas element with id=unity-canvas to exist when component is mounted

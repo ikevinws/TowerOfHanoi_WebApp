@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Image, Button } from 'react-bootstrap';
 import axios from 'axios';
-import { alert as FormAlert, errorList } from './alert';
+import { alert as FormAlert, errorList } from '../alert/alert';
+import './signUpForm.scss';
 
 const SignUpForm = () => {
     // form data handling

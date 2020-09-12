@@ -1,7 +1,7 @@
-@import "node_modules/bootstrap/scss/bootstrap";
+@import 'node_modules/bootstrap/scss/bootstrap';
 @import url(https://fonts.googleapis.com/css2?family=Roboto&display=swap);
 
-$default-fonts: "Roboto", sans-serif, Arial;
+$default-fonts: 'Roboto', sans-serif, Arial;
 $light-text-color: rgb(209, 205, 199);
 $dark-text-color: rgb(10, 10, 35);
 
@@ -12,25 +12,10 @@ html {
     margin: 0;
 }
 
-.game-canvas {
-    width: 100%;
-    height: 70vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    outline: black 3px solid;
-}
-
 .light-background {
     background: #e8e8e8;
     height: 100vh;
     color: $dark-text-color;
-}
-
-.loading-game-canvas {
-    background-color: #231f20;
-    color: $light-text-color;
-    font-size: 25px;
 }
 
 .dark-background {
@@ -43,30 +28,14 @@ html {
     }
 }
 
-.signin-form,
-.signup-form {
-    width: 100%;
-    max-width: 350px;
-    padding: 10px;
-    margin: 0 auto;
-}
-
-.signin-form .form-control,
-.signup-form .form-control {
-    border-radius: 0;
-}
-
-.signin-container,
-.signup-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
 .home-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+}
+
+.background-container {
+    display: flex;
+    flex-direction: column;
 }
