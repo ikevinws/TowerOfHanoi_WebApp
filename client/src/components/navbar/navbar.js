@@ -21,7 +21,7 @@ const AppNavbar = () => {
         }
     };
     return (
-        <Navbar expand="false" bg="dark" variant="dark">
+        <Navbar expand="false" bg="dark" variant="dark" className="animate-navbar nav-theme">
             <Nav.Item>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Brand className="ml-2" href="/">
