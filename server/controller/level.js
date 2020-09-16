@@ -38,8 +38,8 @@ exports.getLevelById = async (req, res) => {
 // create level
 exports.addLevel = async (req, res) => {
     try {
-        const { level, usernameId, moves, time } = req.body;
-
+        const { level, moves, time } = req.body;
+        const usernameId = req.user._id;
         // find level in database based on number of moves made by player
         const filter = { level, username: usernameId, bestMoves: moves };
         const prevLevelData = await Level.findOne(filter);

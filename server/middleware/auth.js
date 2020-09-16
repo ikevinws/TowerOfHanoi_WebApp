@@ -3,7 +3,7 @@
  */
 const checkAuth = (req, res, next) => {
     if (req.isAuthenticated()) {
-        next();
+        return next();
     }
     return res.status(401).send();
 };
@@ -12,7 +12,7 @@ const checkAuth = (req, res, next) => {
  */
 const checkNotAuth = (req, res, next) => {
     if (!req.isAuthenticated()) {
-        next();
+        return next();
     }
     return res.status(401).send();
 };

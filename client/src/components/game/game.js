@@ -1,32 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Spinner } from 'react-bootstrap';
+import { addLevel } from '../../utils/levelAction';
 import './game.scss';
 
-const InitializeUnityInstanceFunctions = (setHasWon, setLevelData) => {
+const InitializeUnityInstanceFunctions = (addLevel) => {
     //functions for unity instance to use
     //possibly a better way then using window
     if (!window.handleWin) {
         window.handleWin = function (level, bestMoves, bestTime) {
-            window.setLevelData({
+            const levelData = {
                 level: parseInt(level),
-                bestMoves: parseInt(bestMoves),
-                bestTime: parseFloat(bestTime)
-            });
-            window.setHasWon(true);
+                moves: parseInt(bestMoves),
+                time: parseFloat(bestTime)
+            };
+            addLevel(levelData);
         };
-    }
-    if (!window.setHasWon) {
-        window.setHasWon = setHasWon;
-    }
-    if (!window.setLevelData) {
-        window.setLevelData = setLevelData;
     }
 };
 
 const Game = () => {
     const [unityInstanceLoaded, setUnityInstanceLoaded] = useState(false);
-    const [hasWon, setHasWon] = useState(false);
-    const [levelData, setLevelData] = useState({});
     useEffect(() => {
         const canvasElement = document.querySelector('#unity-canvas');
         window
@@ -42,7 +35,7 @@ const Game = () => {
             .then((unityInstance) => {
                 if (unityInstance) {
                     setUnityInstanceLoaded((prevLoaded) => !prevLoaded);
-                    InitializeUnityInstanceFunctions(setHasWon, setLevelData);
+                    InitializeUnityInstanceFunctions(addLevel);
                 }
             })
             .catch(() => {
@@ -51,8 +44,6 @@ const Game = () => {
             });
     }, []);
 
-    if (hasWon) {
-    }
     /**
      * cant use tenary to hide/show canvas because createUnityInstance needs
      * canvas element with id=unity-canvas to exist when component is mounted
