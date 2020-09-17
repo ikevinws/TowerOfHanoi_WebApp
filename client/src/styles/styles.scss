@@ -1,7 +1,7 @@
-@import 'node_modules/bootstrap/scss/bootstrap';
+@import "node_modules/bootstrap/scss/bootstrap";
 @import url(https://fonts.googleapis.com/css2?family=Roboto&display=swap);
 
-$default-fonts: 'Roboto', sans-serif, Arial;
+$default-fonts: "Roboto", sans-serif, Arial;
 $light-text-color: rgb(209, 205, 199);
 $dark-text-color: rgb(10, 10, 35);
 
@@ -14,13 +14,11 @@ html {
 
 .light-background {
     background: #e8e8e8;
-    height: 100vh;
     color: $dark-text-color;
 }
 
 .dark-background {
     background: #181818;
-    height: 100vh;
     color: $light-text-color;
 
     .text-muted {
@@ -38,4 +36,5 @@ html {
 .background-container {
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
