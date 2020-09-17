@@ -11,7 +11,7 @@ const InitializeUnityInstanceFunctions = (addLevel) => {
             const levelData = {
                 level: parseInt(level),
                 moves: parseInt(bestMoves),
-                time: parseFloat(bestTime)
+                time: Math.floor(parseFloat(bestTime) * 100) / 100
             };
             addLevel(levelData);
         };

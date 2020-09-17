@@ -38,29 +38,32 @@ exports.getLevelById = async (req, res) => {
 // create level
 exports.addLevel = async (req, res) => {
     try {
-        const { level, moves, time } = req.body;
-        const usernameId = req.user._id;
-        // find level in database based on number of moves made by player
-        const filter = { level, username: usernameId, bestMoves: moves };
-        const prevLevelData = await Level.findOne(filter);
-        if (prevLevelData != null) {
-            // if level based on number of moves exists, compare and update best times
-            if (prevLevelData.bestTime > time) {
-                const update = { bestTime: time };
-                const idFilter = { _id: prevLevelData._id };
-                await Level.updateOne(idFilter, update);
+        if (req.isAuthenticated()) {
+            const { level, moves, time } = req.body;
+            const usernameId = req.user._id;
+            // find level in database based on number of moves made by player
+            const filter = { level, username: usernameId, bestMoves: moves };
+            const prevLevelData = await Level.findOne(filter);
+            if (prevLevelData != null) {
+                // if level based on number of moves exists, compare and update best times
+                if (prevLevelData.bestTime > time) {
+                    const update = { bestTime: time };
+                    const idFilter = { _id: prevLevelData._id };
+                    await Level.updateOne(idFilter, update);
+                }
+            } else {
+                // if level based on number of moves doesnt exists, add new level data
+                const levelData = new Level({
+                    level,
+                    bestMoves: moves,
+                    bestTime: time,
+                    username: usernameId
+                });
+                await levelData.save();
             }
-        } else {
-            // if level based on number of moves doesnt exists, add new level data
-            const levelData = new Level({
-                level,
-                bestMoves: moves,
-                bestTime: time,
-                username: usernameId
-            });
-            await levelData.save();
+            res.status(201).send();
         }
-        res.status(201).send();
+        // do nothing if unauthenticated
     } catch (err) {
         res.status(500).send();
     }
