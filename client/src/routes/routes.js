@@ -46,24 +46,22 @@ const PageRoutes = () => {
 
     //Route Summary: If user is signed in, block signin and sign up routes. Otherwise all routes are availble
     return (
-        <>
+        <div className={`${backgroundTheme} background-container`}>
             <Navbar />
-            <div className={`${backgroundTheme} background-container`}>
-                <Router>
-                    <Switch>
-                        <Route exact path="/leaderboard" component={Leaderboard} />
-                        <Route
-                            exact
-                            path="/"
-                            render={(props) => <Home {...props} resReceived={resReceived} />}
-                        />
-                        <NotAuthRoute exact path="/signin" component={SignIn} />
-                        <NotAuthRoute exact path="/signup" component={SignUp} />
-                        <Redirect to="/" />
-                    </Switch>
-                </Router>
-            </div>
-        </>
+            <Router>
+                <Switch>
+                    <Route exact path="/leaderboard" component={Leaderboard} />
+                    <Route
+                        exact
+                        path="/"
+                        render={(props) => <Home {...props} resReceived={resReceived} />}
+                    />
+                    <NotAuthRoute exact path="/signin" component={SignIn} />
+                    <NotAuthRoute exact path="/signup" component={SignUp} />
+                    <Redirect to="/" />
+                </Switch>
+            </Router>
+        </div>
     );
 };
 
