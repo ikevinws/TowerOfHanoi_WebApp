@@ -41,18 +41,23 @@ exports.addLevel = async (req, res) => {
         if (req.isAuthenticated()) {
             const { level, moves, time } = req.body;
             const usernameId = req.user._id;
-            // find level in database based on number of moves made by player
-            const filter = { level, username: usernameId, bestMoves: moves };
+            // find level data in database with usernameId and level
+            const filter = { level, username: usernameId };
             const prevLevelData = await Level.findOne(filter);
             if (prevLevelData != null) {
-                // if level based on number of moves exists, compare and update best times
-                if (prevLevelData.bestTime > time) {
-                    const update = { bestTime: time };
+                // if level exists compare and update best times
+                if (prevLevelData.bestTime >= time) {
+                    const update = {};
+                    // update bestMoves if moves are lower
+                    if (prevLevelData.bestMoves > moves) {
+                        update.bestMoves = moves;
+                    }
+                    update.bestTime = time;
                     const idFilter = { _id: prevLevelData._id };
                     await Level.updateOne(idFilter, update);
                 }
             } else {
-                // if level based on number of moves doesnt exists, add new level data
+                // if level data does not exists, add new level data
                 const levelData = new Level({
                     level,
                     bestMoves: moves,
