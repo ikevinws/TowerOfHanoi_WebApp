@@ -3,10 +3,15 @@ const Level = require('../model/level');
 // get all levels
 exports.getLevels = async (req, res) => {
     try {
-        const levels = await Level.find();
-        // extract decimals
+        // find all levels and join username
+        const levels = await Level.find().populate('username', '-_id username');
+        // extract decimals and replace username object with just the username string
         const convertedLevels = levels.map((level) => {
-            const convertedLevel = { ...level.toObject(), bestTime: parseFloat(level.bestTime) };
+            const convertedLevel = {
+                ...level.toObject(),
+                bestTime: parseFloat(level.bestTime),
+                username: level.username.username
+            };
             return convertedLevel;
         });
         res.status(200).json({

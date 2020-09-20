@@ -7,3 +7,17 @@ export const addLevel = (levelData) => {
         time: levelData.time
     });
 };
+
+export const getLevels = async () => {
+    try {
+        const res = await axios.get('/api/level/getLevels');
+        if (res.data) {
+            return res.data;
+        } else {
+            return null;
+        }
+    } catch (err) {
+        alert('Error: could not load data.\nThe page will be reloaded.');
+        window.location.reload();
+    }
+};
