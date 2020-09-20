@@ -50,14 +50,9 @@ exports.addLevel = async (req, res) => {
             const filter = { level, username: usernameId };
             const prevLevelData = await Level.findOne(filter);
             if (prevLevelData != null) {
-                // if level exists compare and update best times
-                if (prevLevelData.bestTime >= time) {
-                    const update = {};
-                    // update bestMoves if moves are lower
-                    if (prevLevelData.bestMoves > moves) {
-                        update.bestMoves = moves;
-                    }
-                    update.bestTime = time;
+                // if time and moves are less than or equal to bestTime and bestMoves, respectively, then update
+                if (time <= prevLevelData.bestTime && moves <= prevLevelData.bestMoves) {
+                    const update = { bestMoves: moves, bestTime: time };
                     const idFilter = { _id: prevLevelData._id };
                     await Level.updateOne(idFilter, update);
                 }
