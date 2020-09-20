@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Spinner } from 'react-bootstrap';
+import { Container, Spinner, Row } from 'react-bootstrap';
 import { addLevel } from '../../utils/levelAction';
 import './game.scss';
 
@@ -60,7 +60,15 @@ const Game = () => {
                     </Spinner>
                     <span className="ml-2">Loading Game...</span>
                 </div>
-                <h4 className="p-0 mt-2">Description</h4>
+                <div>
+                    <p className="float-right">Press F to fullscreen</p>
+                    <h4 className="p-0 mt-2">Game Rules</h4>
+                    <ul>
+                        <li>Only one disk can be moved at a time.</li>
+                        <li>A disk can only be moved if it is the uppermost disk on a stack.</li>
+                        <li>No disk may be placed on top of a smaller disk. </li>
+                    </ul>
+                </div>
             </Container>
         </>
     );

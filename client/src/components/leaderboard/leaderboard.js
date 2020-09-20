@@ -49,6 +49,7 @@ const Leaderboard = () => {
                     data={levelData}
                     striped
                     condensed
+                    pagination={paginationFactory()}
                 />
             ) : (
                 <div>data is loading</div>

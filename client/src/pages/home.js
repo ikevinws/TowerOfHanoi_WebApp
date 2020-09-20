@@ -16,15 +16,17 @@ const Home = ({ resReceived }) => {
         }
     }, [auth.isAuth, resReceived]);
 
+    const message = (
+        <div>
+            <a href="/signin">Sign in</a> to have your scores recorded on the leaderboard.
+        </div>
+    );
+
     return (
         <div className="w-100 home-container">
             {showAlert ? (
                 <Container className="d-block my-3 p-0">
-                    <Alert
-                        message={'Sign in to have your scores recorded on the leaderboard.'}
-                        showAlert={showAlert}
-                        setShowAlert={setShowAlert}
-                    />
+                    <Alert message={message} showAlert={showAlert} setShowAlert={setShowAlert} />
                 </Container>
             ) : null}
             <Game />
