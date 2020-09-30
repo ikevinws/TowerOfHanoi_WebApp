@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Spinner, Row } from 'react-bootstrap';
+import { Container, Spinner } from 'react-bootstrap';
 import { addLevel } from '../../utils/levelAction';
 import './game.scss';
 
@@ -61,7 +61,7 @@ const Game = () => {
                     <span className="ml-2">Loading Game...</span>
                 </div>
                 <div>
-                    <p className="float-right">Press F to fullscreen</p>
+                    <p className="float-right">Press F to Fullscreen</p>
                     <h4 className="p-0 mt-2">Game Rules</h4>
                     <ul>
                         <li>Only one disk can be moved at a time.</li>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Container, Spinner } from 'react-bootstrap';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
@@ -15,7 +16,7 @@ const columns = [
     },
     {
         dataField: 'bestTime',
-        text: 'Best Time'
+        text: 'Best Time (seconds)'
     },
     {
         dataField: 'bestMoves',
@@ -41,20 +42,32 @@ const Leaderboard = () => {
     }, []);
 
     return (
-        <div>
+        <>
             {isDataLoaded ? (
-                <BootstrapTable
-                    keyField="_id"
-                    columns={columns}
-                    data={levelData}
-                    striped
-                    condensed
-                    pagination={paginationFactory()}
-                />
+                <div className="p-5">
+                    <div className="text-center m-1">
+                        <h2>Leaderboard</h2>
+                        <p className="text-muted">
+                            Best time and number of moves are updated when time and moves are less
+                            than or equal to previous attempt.
+                        </p>
+                    </div>
+                    <BootstrapTable
+                        keyField="_id"
+                        columns={columns}
+                        data={levelData}
+                        striped
+                        condensed
+                        pagination={paginationFactory()}
+                    />
+                </div>
             ) : (
-                <div>data is loading</div>
+                <Container className="h-100 flex-xy-center">
+                    <Spinner variant="primary" animation="border" role="status" className="mr-2" />
+                    Loading Leaderboard...
+                </Container>
             )}
-        </div>
+        </>
     );
 };
 
