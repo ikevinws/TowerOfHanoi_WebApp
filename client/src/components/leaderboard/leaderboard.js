@@ -31,9 +31,21 @@ const Leaderboard = () => {
     const getLevelsData = async () => {
         const data = await getLevels();
         if (data) {
-            setLevelData(data.levels);
+            //sort data
+            const compare = (a, b) => {
+                if (a.level < b.level) {
+                    return -1;
+                } else if (a.level === b.level && a.bestTime < b.bestTime) {
+                    return -1;
+                } else if (a.level === b.level && a.bestTime > b.bestTime) {
+                    return 1;
+                }
+                return 0;
+            };
+            const sortedLevelData = data.levels.sort(compare);
+            //set states
+            setLevelData(sortedLevelData);
             setIsDataLoaded(true);
-            console.log(data.levels);
         }
     };
 
