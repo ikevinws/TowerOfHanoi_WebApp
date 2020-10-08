@@ -3,7 +3,7 @@ import { Container, Spinner, Button } from 'react-bootstrap';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import filterFactory, { textFilter, numberFilter } from 'react-bootstrap-table2-filter';
+import filterFactory, { textFilter, numberFilter, Comparator } from 'react-bootstrap-table2-filter';
 import { getLevels } from '../../utils/levelAction';
 
 //used to clear filters
@@ -32,6 +32,7 @@ const columns = [
         dataField: 'bestTime',
         text: 'Best Time (seconds)',
         filter: numberFilter({
+            defaultValue: { comparator: Comparator.EQ },
             getFilter: (filter) => {
                 filtersObj.bestTimeFilter = filter;
             }
@@ -41,6 +42,7 @@ const columns = [
         dataField: 'bestMoves',
         text: 'Number of Moves',
         filter: numberFilter({
+            defaultValue: { comparator: Comparator.EQ },
             getFilter: (filter) => {
                 filtersObj.bestMovesFilter = filter;
             }
