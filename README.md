@@ -38,7 +38,7 @@ npm run dev
 </ul>
 
 <h4> Levels </h4>
-<ul>2
+<ul>
   <li> <b>GET</b> /api/level/getLevels </li>
   <li> <b>GET</b> /api/level/:id </li>
   <li> <b>POST</b> /api/level/addLevel </li>
