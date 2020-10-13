@@ -4,6 +4,8 @@
     "description": "",
     "main": "server.js",
     "scripts": {
+        "setup": "npm install && npm run setup-client",
+        "setup-client": "npm install --prefix client",
         "lint": "eslint ./",
         "install-all": "concurrently \"npm install\" \"npm install --prefix client\"",
         "build": "npm run build --prefix client",
@@ -22,7 +24,7 @@
         "cors": "^2.8.5",
         "express": "^4.17.1",
         "express-session": "^1.17.1",
-        "mongoose": "^5.10.8",
+        "mongoose": "^5.10.9",
         "morgan": "^1.10.0",
         "passport": "^0.4.1",
         "passport-local": "^1.0.0"
@@ -39,7 +41,7 @@
         "eslint-plugin-jsx-a11y": "^6.3.1",
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-prettier": "^3.1.4",
-        "eslint-plugin-react": "^7.21.3",
+        "eslint-plugin-react": "^7.21.4",
         "eslint-plugin-react-hooks": "^4.1.2",
         "nodemon": "^2.0.4",
         "prettier": "^2.1.2"
