@@ -5,6 +5,8 @@ A full stack MERN website for the Tower of Hanoi game where player scores are re
 
 <b>Website: </b> <a>https://tower-of-hanoi-kevin.herokuapp.com</a>
 
+<img width="1438" alt="screenshot" src="images/home.png">
+
 <h2>Installation</h2>
 
  Setup the project and install the packages by running
