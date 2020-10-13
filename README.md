@@ -1,7 +1,9 @@
 # Tower Of Hanoi
-A full stack MERN website for the tower of hanoi game where player scores are recorded to a leaderboard. The game was built in Unity3D and exported as a WebGL.
+A full stack MERN website for the Tower of Hanoi game where player scores are recorded to a leaderboard. The game was built in Unity3D and exported as a WebGL. 
 
 <b>Game source code:</b> <a>https://github.com/ikevinws/TowerOfHanoi</a>
+
+<b>Website: </b> <a>https://tower-of-hanoi-kevin.herokuapp.com</a>
 
 <h2>Installation</h2>
 
