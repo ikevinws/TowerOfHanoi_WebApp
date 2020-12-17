@@ -21,7 +21,7 @@ npm run dev
 <h2>Built with</h2>
 <ul>
     <li>FrontEnd: <b> React.JS, Bootstrap, HTML/CSS </b></li>
-    <li>Backend:  <b> Node.JS, Express.JS </b> </li>
+    <li>Backend:  <b> Node.JS, Express.JS, Passport.JS </b> </li>
     <li>Database: <b> MongoDB, Mongoose </b> </li>
     <li>Game Engine: <b>Unity3D</b></li>
 </ul>
@@ -46,4 +46,11 @@ npm run dev
   <li> <b>GET</b> /api/level/getLevels </li>
   <li> <b>GET</b> /api/level/:id </li>
   <li> <b>POST</b> /api/level/addLevel </li>
+</ul>
+
+<h2> Credits </h2>
+<ul>
+  <li>The button icons were obtained from <a>www.flaticon.com</a>.</li>
+  <li>The sound effects were obtained from <a>www.zapsplat.com</a>.</li>
+  <li>Some assets (wood texture, and skybox) were downloaded from the Unity store.</li> 
 </ul>
