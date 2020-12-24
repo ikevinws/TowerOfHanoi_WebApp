@@ -18,7 +18,7 @@ const Home = ({ resReceived }) => {
 
     const message = (
         <div>
-            <a href="/signin">Sign in</a> to have your scores recorded on the leaderboard.
+            <a href="/signin">Sign in</a> to have your scores posted onto the leaderboard.
         </div>
     );
 
