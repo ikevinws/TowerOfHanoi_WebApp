@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Redirect, Switch, BrowserRouter as Router } from 'react-router-dom';
 import axios from 'axios';
 //context
@@ -13,12 +13,8 @@ import Leaderboard from '../pages/leaderboard';
 import Navbar from '../components/navbar/navbar';
 
 const PageRoutes = () => {
-    /**
-     * Must use useRef or else useEffect will complain about dependencies
-     * if contexts were included in useEffect's dependencies, it will cause an infinite loop
-     */
-    const authRef = useRef(useAuthContext());
-    const userRef = useRef(useUserContext());
+    const { isAuth, setIsAuth } = useAuthContext();
+    const { setUser } = useUserContext();
 
     //resReceived is passed down to Home component to determine if sign in alert should be displayed
     const [resReceived, setResReceived] = useState(false);
@@ -29,8 +25,8 @@ const PageRoutes = () => {
             try {
                 const res = await axios.get('/api/user/checkAuth', { withCredentials: true });
                 if (res.data.userId) {
-                    authRef.current.setIsAuth(true);
-                    userRef.current.setUser((prevUserData) => {
+                    setIsAuth(true);
+                    setUser((prevUserData) => {
                         return { ...prevUserData, userId: res.data.userId };
                     });
                 }
@@ -40,7 +36,7 @@ const PageRoutes = () => {
             }
         };
         checkAuth();
-    }, []);
+    }, [setIsAuth, setUser]);
     //background
     const backgroundTheme = useBackgroundTheme();
 
@@ -56,8 +52,8 @@ const PageRoutes = () => {
                         path="/"
                         render={(props) => <Home {...props} resReceived={resReceived} />}
                     />
-                    <NotAuthRoute exact path="/signin" component={SignIn} />
-                    <NotAuthRoute exact path="/signup" component={SignUp} />
+                    <NotAuthRoute exact path="/signin" component={SignIn} isAuth={isAuth} />
+                    <NotAuthRoute exact path="/signup" component={SignUp} isAuth={isAuth} />
                     <Redirect to="/" />
                 </Switch>
             </Router>
@@ -66,12 +62,11 @@ const PageRoutes = () => {
 };
 
 //reference: https://blog.netcetera.com/how-to-create-guarded-routes-for-your-react-app-d2fe7c7b6122
-const NotAuthRoute = ({ component: Component, ...rest }) => {
-    const auth = useAuthContext();
+const NotAuthRoute = ({ component: Component, isAuth, ...rest }) => {
     return (
         <Route
             {...rest}
-            render={(props) => (!auth.isAuth ? <Component {...props} /> : <Redirect to="/" />)}
+            render={(props) => (!isAuth ? <Component {...props} /> : <Redirect to="/" />)}
         />
     );
 };
