@@ -84,7 +84,8 @@ exports.signOutUser = async (req, res) => {
 
 exports.checkUserAuth = async (req, res) => {
     if (req.isAuthenticated()) {
-        return res.status(200).send({ userId: req.user._id });
+        res.status(200).send({ auth: true, userId: req.user._id });
+    } else {
+        res.status(200).send({ auth: false });
     }
-    return res.status(401).send();
 };

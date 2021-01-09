@@ -24,14 +24,17 @@ const PageRoutes = () => {
         const checkAuth = async () => {
             try {
                 const res = await axios.get('/api/user/checkAuth', { withCredentials: true });
-                if (res.data.userId) {
+                if (res.data.auth) {
                     setIsAuth(true);
                     setUser((prevUserData) => {
                         return { ...prevUserData, userId: res.data.userId };
                     });
+                } else {
+                    setIsAuth(false);
                 }
                 setResReceived(true);
             } catch (err) {
+                setIsAuth(false);
                 setResReceived(true);
             }
         };
