@@ -45,8 +45,7 @@ exports.addUser = async (req, res) => {
                 await newUser.save();
                 res.status(201).send();
             }
-        } catch (err) {
-            console.log(err);
+        } catch {
             res.status(500).send();
         }
     }
@@ -60,7 +59,7 @@ exports.signInUser = (req, res, next) => {
         }
         if (!user) {
             errors.push({ msg: 'Invalid username or password.' });
-            return res.status(400).send({ errors });
+            return res.status(400).json({ errors });
         }
         req.login(user, (error) => {
             if (error) {
@@ -84,8 +83,8 @@ exports.signOutUser = async (req, res) => {
 
 exports.checkUserAuth = async (req, res) => {
     if (req.isAuthenticated()) {
-        res.status(200).send({ auth: true, userId: req.user._id });
+        res.status(200).json({ auth: true, userId: req.user._id });
     } else {
-        res.status(200).send({ auth: false });
+        res.status(200).json({ auth: false });
     }
 };
