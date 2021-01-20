@@ -23,7 +23,6 @@ html {
 .dark-background {
     background: #181818;
     color: $light-text-color;
-
     .text-muted {
         color: rgb(158, 150, 137) !important;
     }
@@ -43,7 +42,7 @@ html {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .flex-xy-center {
