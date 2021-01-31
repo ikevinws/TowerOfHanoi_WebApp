@@ -20,10 +20,10 @@ npm run dev
 
 <h2>Built with</h2>
 <ul>
-    <li>FrontEnd: <b> React.JS, Bootstrap, HTML/CSS </b></li>
-    <li>Backend:  <b> Node.JS, Express.JS, Passport.JS </b> </li>
-    <li>Database: <b> MongoDB, Mongoose </b> </li>
-    <li>Game Engine: <b>Unity3D</b></li>
+    <li><b>FrontEnd:</b> React.JS, Bootstrap, HTML/CSS </li>
+    <li><b>Backend:</b> Node.JS, Express.JS, Passport.JS  </li>
+    <li><b>Database:</b> MongoDB, Mongoose  </li>
+    <li><b>Game Engine:</b> Unity3D</li>
 </ul>
 
 <h2> Features </h2>
